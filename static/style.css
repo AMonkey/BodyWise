@@ -1,0 +1,187 @@
+html {
+    height: 100%;
+
+}
+body {
+    //background-color: #aaaabb;
+    height: 100%;
+    margin: 0;
+
+}
+
+.content {
+    background-color: #1166aa;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+
+}
+#sidebar {
+    float: left;
+    max-width: 20%;
+    height: 80%;
+    padding: 20px;
+    margin: 10px;
+    background-color: #ccdddd;
+
+    border: 1px solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 3px black;
+    -webkit-box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px black;
+
+}
+
+.single_metric {
+    background-color: #ccdddd;
+    padding: 5px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+}
+
+#chartbox {
+    width: 560px;
+    height: 360px;
+    float: right;
+    background-color: #ccdddd;
+    position: relative;
+    right: 10px;
+    top: 10px;
+    padding: 20px;
+    padding-bottom: 0px;
+
+    border: 1px solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 3px black;
+    -webkit-box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px black;
+
+}
+
+#chart {
+    width: 100%;
+    height: auto;
+    background-color: #ccdddd;
+    
+}
+
+#tabs {
+    font-size: 2.13em; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+
+}
+
+.sub_content {
+    background: #ccdddd;
+    padding: 5px;
+
+}
+
+#submit_content {
+    width: 550px;
+    height: auto;
+    background: #ccdddd;
+    display: none;
+
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    margin-left: -200px;
+
+    padding: 10px;
+    border: 1px solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 3px black;
+    -webkit-box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px black;
+    z-index: 99;
+
+}
+
+#submit_box_exit {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+}
+
+#more {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+
+}
+
+#submit_record {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    cursor: pointer;
+
+}
+
+.delete_metric {
+    position: relative;
+    top: -45px;
+    left: 515px;
+    cursor: pointer;
+
+}
+
+#sp_register {
+    float: right;
+    width: 40%;
+    height: 270px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #ccdddd;
+
+    border: 1px solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 3px black;
+    -webkit-box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px black;
+
+}
+
+#sp_login {
+    float: left;
+    width: 40%;
+    height: 270px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #ccdddd;
+    align: right;
+
+    border: 1px solid;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 3px 3px 3px black;
+    -webkit-box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px black;
+
+}
+
+.sp_input {
+    display: block;
+    vertical-align: middle;
+    height: auto;
+    width: 280px;
+
+}
+
+.sp_input > label > input {
+    float: right;
+    width: 140px;
+
+}

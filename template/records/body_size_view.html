@@ -1,0 +1,17 @@
+<br>
+<label>Size of Part (in.)
+    <input type="text" class="val_field" name="value"/>
+</label>
+<label>Time Recorded
+    <input type="text" class="calendar" name="time_measured"/>
+</label>
+<label>Part of Body
+    <select name="body_part">
+        {% for p in parts %}
+        <option> {{ p.1 }} </option>
+        {% endfor %}
+
+    </select>
+</label>
+<br>
+<hr>

@@ -1,0 +1,65 @@
+<html>
+<head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css"/>
+    <title>Welcome to BodyWise--A working title!</title>
+
+</head>
+
+<body>
+    <div class="content">
+        <h1>Welcome to Bodywise!</h1>
+
+        <form id= "sp_register" method="POST">
+            <h2>Register</h2>
+            {% csrf_token %}
+            <div class="sp_input"> 
+                <label>Username
+                    <input type="text" name="username">
+                </label>
+            </div>
+            <br>
+            <div class="sp_input"> 
+                <label>Password
+                    <input type="password" name="password"/>
+                </label>
+            </div>
+            <br>
+            <div class="sp_input"> 
+                <label>Retype Password
+                    <input type="password" name="password_check"/>
+                </label>
+            </div>
+            <br>
+            <div class="sp_input"> 
+                <label>Email
+                    <input type="text" name="email"/>
+                </label>
+            </div>
+            <br>
+            <input type="submit"/>
+            <div style="color:red;">{{ register_error }}</div>
+        </form>
+
+        <form id="sp_login" method="POST">
+            {% csrf_token %}
+            <h2>Login</h2>
+            <div class="sp_input"> 
+                <label>Username
+                    <input type="text" name ="username"/>
+                </label>
+            </div>
+            <br>
+            <div class="sp_input"> 
+                <label>Password
+                    <input type="password" name="password"/>
+                </label>
+            </div>
+            <br>
+            <input type="submit"/>
+            <div style="color:red;">{{ login_error }}</div>
+        </form>
+
+    </div>
+</body>
+
+</html> 

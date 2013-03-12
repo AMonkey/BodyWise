@@ -1,0 +1,114 @@
+<html>
+<head>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery-ui.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}font-awesome.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}cupertino/jquery-ui.css"/>
+
+</head>
+<body>
+    <h3>Submit Record</h3>
+    <i class="icon-remove-circle icon-2x" id="submit_box_exit"></i>
+    <i class="icon-plus icon-2x" id="more"></i>
+    <i class="icon-upload icon-2x" id="submit_record"></i>
+    <form method="post">
+        {% csrf_token %}
+        <div class="single_metric">
+
+            <label> Measurement
+                <select name="sub_rec" class="measurement_selector">
+                    {% for s in sub_recs %}
+                    <option> {{ s }} </option>
+                    {% endfor %}
+
+                </select>
+            </label>
+            <div class="sub_content"><br><hr></div>
+        </div>
+        <br>
+        <!-- <input type="submit"/> -->
+    </form>
+
+    <script type="text/javascript">
+        // Make X icon exit overlay
+       $('#submit_box_exit').click(function() { 
+            $('#submit_content').css('display', 'none').empty();
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        // AJAX load of static HTML for a new metric in form
+        $('.measurement_selector').change(function() {
+            var selected = $(this).val();
+            $(this).parent().siblings( $('.content') ).load(
+                'records/submit/?selected_template=records/' +
+                selected.replace(' ','_').toLowerCase()+
+                '_view.html', function() {
+                    // Run on complete 
+                    $('.calendar').datepicker();
+                    $('.delete_metric').click(function() {
+                        if ($('.single_metric').length > 1) {
+                            $(event.target)
+                                .parents( '.single_metric' ).remove();
+
+                        }
+                    });
+            });
+        });
+
+    </script>
+
+    <script>
+        // Adds new metric with an incremented ID
+        var clone = $('.single_metric:last').clone(true);
+        $('#more').on('click', function() {
+            $(clone).insertAfter('.single_metric:last');
+            //$('.single_metric :last').find( $('.content') ).children().remove();
+        
+        });
+
+    </script>
+
+    <script>
+        // Overrides regular post to send JSON
+        $('#submit_record').click(function() {
+            console.log('Clicked!');
+            var json = {};
+            // Iterate through each metric div
+            $('.single_metric').each(function(i) {
+                var metric = {};
+                var metric_type = $(this).find(
+                    $('.measurement_selector') ).val();
+                // Make an object containing all of the fields of the metric
+                $(this).find( $('input') ).each(function(i) {
+                    metric[this.name] = $(this).val();
+
+                });
+                json[metric_type] = metric;
+
+            });
+            // Add the csrf token
+            var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+            $.ajax({
+                type: 'POST',
+                url: '/records/submit/',
+                dataType: 'json',
+                data: JSON.stringify(json),
+                processData: false,
+                crossDomain: false,
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+
+                },
+                complete: function() {
+                    // Remove overlay
+                    $('#submit_content').css('display', 'none').empty();
+                    location.reload();
+
+                }
+            });
+        });
+    </script>
+</body>
+</html>

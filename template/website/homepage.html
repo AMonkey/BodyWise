@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>BodyWise Dashboard</title>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jqplot.highlighter.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}jqplot.cursor.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}jquery.jqplot.min.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/cupertino/jquery-ui.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css"/>
+
+</head>
+
+<body>
+    <div class="content">
+        <div id="tabs">
+            <button id="submit">New Record</button>
+            <button id="new_chart">New Chart</button>
+            <button id="stats">Statistics</button>
+            <button id="profile">Profile</button>
+            <button id="logout"><a href="/?logout=True">Log Out</a></button>
+
+        </div>
+
+        <div id="sidebar">
+                Welcome, Will!<br>
+                Recently viewed:<br>
+                <select size="4">
+                    <option>Foo</option>
+                    <option>Bar</option>
+                    <option>Bax</option>
+                    <option>WAG</option>
+                    <option>stuff</option>
+
+                </select>
+        </div>
+
+        <div id="chartbox"><div id="chart"></div></div>
+
+    </div>
+
+    <div id="submit_content">Loading!</div>
+    <div id="stats_content"></div>
+    <div id="profile_content"></div>
+
+    <script>
+        
+
+    </script>
+
+    <script>
+        // Make buttons into tab things
+        $('#tabs').buttonset();
+
+    </script>
+
+    <script>
+        // Make overlay
+        $('#submit').click(function() {
+            var sub_cont = $('#submit_content');
+            $(sub_cont).css('display', 'block').load('/records/submit/')
+
+        });
+
+    </script>
+
+    <script>
+        // From JSON response, load chart and label nodes
+        $.getJSON('/charts/', function(data) {
+            if (data.nodes.length > 0) {
+                console.log(data);
+                $.jqplot('chart', [data.nodes], {
+                    title: 'Weight vs. Time',
+                    axes: {
+                        xaxis: {
+                            renderer: $.jqplot.DateAxisRenderer,
+                            tickOptions: {formatString: '%b %#d'}
+                        },
+                        yaxis: {
+                            tickOptions: {formatString: '%d lbs.'}
+
+                        }
+                    },
+                    highlighter: {
+                        show: true,
+                        sizeAdjust: 7.5
+
+                    },
+                    cursor: {
+                        show: false
+
+                    }
+                });
+                $('#chart').on('jqplotDataClick', function() {
+                    console.log('CHART clicked!');
+
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
